@@ -182,12 +182,12 @@ namespace NeoBoilerplate.Identity.Migrations.MSSQL
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5cf6b091-ef3e-4d85-84f3-a11ffb2e2416", "af2ace2a-2ae7-4b22-af75-daa445ae29b1", "Viewer", "VIEWER" });
+                values: new object[] { "31e0cfa3-0248-4867-9423-8ecdaa3acdb3", "78974220-dfd5-4915-b940-8cd9ca7716c2", "Administrator", "ADMINISTRATOR" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "d43cc707-d956-4403-bd3b-5dace922e2c1", "49f59689-aa92-4ecb-8069-955edfc1acbe", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "711b75f9-c239-4f6b-a131-6d414348eee8", "27f4db46-2c6c-49a9-b4b7-38a7417d9bd4", "Viewer", "VIEWER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

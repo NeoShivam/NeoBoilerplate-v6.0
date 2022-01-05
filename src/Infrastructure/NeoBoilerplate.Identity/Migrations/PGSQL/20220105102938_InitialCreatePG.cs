@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace NeoBoilerplate.Identity.Migrations.PGSQL
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreatePG : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -185,8 +185,8 @@ namespace NeoBoilerplate.Identity.Migrations.PGSQL
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6f57079a-f85d-45ac-bd2f-a5ea38de5621", "05d2625d-d950-48c6-a497-ae49f48f05dd", "Viewer", "VIEWER" },
-                    { "89456494-fc80-44c8-a29d-70f77da0a78c", "cbcd87b5-03fe-48a2-afde-827639954bac", "Administrator", "ADMINISTRATOR" }
+                    { "a29d78fc-aca5-415a-92dc-5978ba3fbbac", "250b93ba-3ec1-4cd0-9a1d-e1d88f093421", "Viewer", "VIEWER" },
+                    { "b6fdd9cf-4f9c-4140-bac9-595be4b07a77", "dbe72736-2690-4551-87ad-c8981f48dd3c", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.CreateIndex(

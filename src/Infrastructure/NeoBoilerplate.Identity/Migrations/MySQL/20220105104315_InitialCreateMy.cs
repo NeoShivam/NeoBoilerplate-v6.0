@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NeoBoilerplate.Identity.Migrations.MySQL
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreateMy : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -227,12 +227,12 @@ namespace NeoBoilerplate.Identity.Migrations.MySQL
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "9afc98c2-5777-42a7-8924-4a6c3a53fe57", "35326a6d-20c6-463d-a659-91d69c3da390", "Viewer", "VIEWER" });
+                values: new object[] { "8b49150b-ae00-448c-93a6-7b9af44253ab", "1c358aba-92e6-473d-9f63-5c811e3bf6a7", "Viewer", "VIEWER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "ff8baf41-79fc-40d0-935f-d532d9f28fee", "a967dbf4-5db5-4d64-992a-ba645933e662", "Administrator", "ADMINISTRATOR" });
+                values: new object[] { "c5510915-3917-4e82-8841-2f965538672c", "689ba099-fa24-41ab-85db-487db551ad16", "Administrator", "ADMINISTRATOR" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
