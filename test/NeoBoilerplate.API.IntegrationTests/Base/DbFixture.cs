@@ -26,35 +26,30 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
             var identityBuilder = new DbContextOptionsBuilder<IdentityDbContext>();
 
 
-            var dbProvider = Environment.GetEnvironmentVariable("dbProvider") != null
-                                ? Environment.GetEnvironmentVariable("dbProvider") : "PGSQL";
-            switch (dbProvider)
-            {
-                case "MSSQL":
-                    ApplicationConnString = $"Server=localhost,1433;Database={ApplicationDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M";
+            //#if (Database == "MSSQL")
+            ApplicationConnString = $"Server=localhost,1433;Database={ApplicationDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M";
                     IdentityConnString = $"Server=localhost,1433;Database={IdentityDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M";
                     HealthCheckConnString = $"Server=localhost,1433;Database={HealthCheckDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M";
                     applicationBuilder.UseSqlServer(ApplicationConnString);
                     identityBuilder.UseSqlServer(IdentityConnString);
-                    break;
-                case "PGSQL":
-                    ApplicationConnString = $"Server=localhost;Port=5430;Database={ApplicationDbName};User Id=root;Password=root;CommandTimeout = 300;";
+            //#endif
+
+            //#if (Database == "PGSQL")
+            ApplicationConnString = $"Server=localhost;Port=5430;Database={ApplicationDbName};User Id=root;Password=root;CommandTimeout = 300;";
                     IdentityConnString = $"Server=localhost;Port=5430;Database={IdentityDbName};User Id=root;Password=root;CommandTimeout = 300;";
 
                     HealthCheckConnString = $"Server=localhost;Port=5430;Database={HealthCheckDbName};User Id=root;Password=root;CommandTimeout = 300;";
                     applicationBuilder.UseNpgsql(ApplicationConnString);
                     identityBuilder.UseNpgsql(IdentityConnString);
-                    break;
-                case "MySQL":
-                    ApplicationConnString = $"Server=localhost;Port=3306;Database={ApplicationDbName};Userid=root;Password=root;";
+            //endif
+
+            //#if (Database == "MySQL")
+            ApplicationConnString = $"Server=localhost;Port=3306;Database={ApplicationDbName};Userid=root;Password=root;";
                     IdentityConnString = $"Server=localhost;Port=3306;Database={IdentityDbName};Userid=root;Password=root;";
                     HealthCheckConnString = $"Server=localhost;Port=3306;Database={HealthCheckDbName};Userid=root;Password=root;";
                     applicationBuilder.UseMySql(ApplicationConnString, new MySqlServerVersion(new Version(8, 0, 11)));
                     identityBuilder.UseMySql(IdentityConnString, new MySqlServerVersion(new Version(8, 0, 11)));
-                    break;
-                default:
-                    break;
-            }
+            //#endif
 
             _applicationDbContext = new ApplicationDbContext(applicationBuilder.Options);
             _applicationDbContext.Database.EnsureCreated();

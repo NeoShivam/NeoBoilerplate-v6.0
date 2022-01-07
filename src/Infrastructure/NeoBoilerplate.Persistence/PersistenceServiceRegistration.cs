@@ -11,27 +11,22 @@ namespace NeoBoilerplate.Persistence
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var dbProvider = configuration.GetValue<string>("dbProvider");
+            //#if (Database == "MSSQL")
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("ApplicationConnectionString")));
+            //#endif
 
-            switch (dbProvider)
-            {
-                case "MSSQL":
-                    services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlServer(configuration.GetConnectionString("GloboTicketTicketManagementConnectionString")));
-                    break;
-                case "PGSQL":
-                    services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseNpgsql(configuration.GetConnectionString("GloboTicketTicketManagementConnectionString")));
-                    break;
-                case "MySQL":
-                    services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseMySql(configuration.GetConnectionString("GloboTicketTicketManagementConnectionString"),
+            //#if (Database == "PGSQL")
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString("ApplicationConnectionString")));
+            //#endif
+
+            //#if (Database == "MySQL")
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseMySql(configuration.GetConnectionString("ApplicationConnectionString"),
             new MySqlServerVersion(new Version(8, 0, 11))
             ));
-                    break;
-                default:
-                    break;
-            }
+            //#endif
 
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
             services.AddScoped<ICategoryRepository, CategoryRepository>();

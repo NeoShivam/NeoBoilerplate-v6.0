@@ -20,30 +20,22 @@ namespace NeoBoilerplate.Identity
         public static void AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
-
-            var dbProvider = configuration.GetValue<string>("dbProvider");
-            switch (dbProvider)
-            {
-                case "MSSQL":
+            //#if (Database == "MSSQL")
                     services.AddDbContext<IdentityDbContext>(
-                        options => options.UseSqlServer(configuration.GetConnectionString("GloboTicketIdentityConnectionString"),
+                        options => options.UseSqlServer(configuration.GetConnectionString("IdentityConnectionString"),
                         b => b.MigrationsAssembly(typeof(IdentityDbContext).Assembly.FullName)));
-                    break;
-                case "PGSQL":
-                    services.AddDbContext<IdentityDbContext>(
-                        options => options.UseNpgsql(configuration.GetConnectionString("GloboTicketIdentityConnectionString"),
+            //#endif   
+            //#if (Database == "PGSQL")
+            services.AddDbContext<IdentityDbContext>(
+                        options => options.UseNpgsql(configuration.GetConnectionString("IdentityConnectionString"),
                         b => b.MigrationsAssembly(typeof(IdentityDbContext).Assembly.FullName)));
-                    break;
-                case "MySQL":
-                    services.AddDbContext<IdentityDbContext>(
-                         options => options.UseMySql(configuration.GetConnectionString("GloboTicketIdentityConnectionString"),
+            //#endif
+            //#if (Database == "MySQL")
+            services.AddDbContext<IdentityDbContext>(
+                         options => options.UseMySql(configuration.GetConnectionString("IdentityConnectionString"),
             new MySqlServerVersion(new Version(8, 0,11)),
                          b => b.MigrationsAssembly(typeof(IdentityDbContext).Assembly.FullName)));
-                    break;
-                default:
-                    break;
-            }
-
+            //#endif
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDbContext>().AddDefaultTokenProviders();
 

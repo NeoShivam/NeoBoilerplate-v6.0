@@ -8,12 +8,9 @@ namespace NeoBoilerplate.Api.Extensions
     {
         public static IServiceCollection AddHealthcheckExtensionService(this IServiceCollection services, IConfiguration configuration)
         {
-            var dbProvider = configuration.GetValue<string>("dbProvider");
-            switch (dbProvider)
-            {
-                case "MSSQL":
-                    services.AddHealthChecks()
-                        .AddSqlServer(configuration["ConnectionStrings:GloboTicketIdentityConnectionString"], tags: new[] {
+            //#if (Database == "MSSQL")
+            services.AddHealthChecks()
+                        .AddSqlServer(configuration["ConnectionStrings:IdentityConnectionString"], tags: new[] {
                             "db",
                             "all"})
                         .AddUrlGroup(new Uri(configuration["API:WeatertherInfo"]), tags: new[] {
@@ -26,11 +23,11 @@ namespace NeoBoilerplate.Api.Extensions
                         opt.MaximumHistoryEntriesPerEndpoint(60); //maximum history of checks
                         opt.SetApiMaxActiveRequests(1); //api requests concurrency
                         opt.AddHealthCheckEndpoint("API", "/healthz"); //map health check api
-                    }).AddSqlServerStorage(configuration["ConnectionStrings:GloboTicketHealthCheckConnectionString"]);
-                    break;
-                case "PGSQL":
-                    services.AddHealthChecks()
-                        .AddNpgSql(configuration["ConnectionStrings:GloboTicketIdentityConnectionString"], tags: new[] {
+                    }).AddSqlServerStorage(configuration["ConnectionStrings:HealthCheckConnectionString"]);
+            //#endif
+            //#if (Database == "PGSQL")
+            services.AddHealthChecks()
+                        .AddNpgSql(configuration["ConnectionStrings:IdentityConnectionString"], tags: new[] {
                             "db",
                             "all"})
                         .AddUrlGroup(new Uri(configuration["API:WeatertherInfo"]), tags: new[] {
@@ -43,11 +40,12 @@ namespace NeoBoilerplate.Api.Extensions
                         opt.MaximumHistoryEntriesPerEndpoint(60); //maximum history of checks
                         opt.SetApiMaxActiveRequests(1); //api requests concurrency
                         opt.AddHealthCheckEndpoint("API", "/healthz"); //map health check api
-                    }).AddPostgreSqlStorage(configuration["ConnectionStrings:GloboTicketHealthCheckConnectionString"]);
-                    break;
-                case "MySQL":
-                    services.AddHealthChecks()
-                        .AddMySql(configuration["ConnectionStrings:GloboTicketIdentityConnectionString"], tags: new[] {
+                    }).AddPostgreSqlStorage(configuration["ConnectionStrings:HealthCheckConnectionString"]);
+            //#endif
+
+            //#if (Database == "MySQL")
+            services.AddHealthChecks()
+                        .AddMySql(configuration["ConnectionStrings:IdentityConnectionString"], tags: new[] {
                             "db",
                             "all"})
                         .AddUrlGroup(new Uri(configuration["API:WeatertherInfo"]), tags: new[] {
@@ -60,11 +58,9 @@ namespace NeoBoilerplate.Api.Extensions
                         opt.MaximumHistoryEntriesPerEndpoint(60); //maximum history of checks
                         opt.SetApiMaxActiveRequests(1); //api requests concurrency
                         opt.AddHealthCheckEndpoint("API", "/healthz"); //map health check api
-                    }).AddMySqlStorage(configuration["ConnectionStrings:GloboTicketHealthCheckConnectionString"]);
-                    break;
-                default:
-                    break;
-            }
+                    }).AddMySqlStorage(configuration["ConnectionStrings:HealthCheckConnectionString"]);
+                   //#endif
+            
 
             return services;
         }

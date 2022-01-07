@@ -4,6 +4,7 @@ networks:
   clean-network:
   
 services:
+##if (Database == "MSSQL")
   mssql:
     image: "mcr.microsoft.com/mssql/server"
     ports:
@@ -13,7 +14,9 @@ services:
         ACCEPT_EULA: "Y"
     networks:
       - clean-network
+  ##endif
 
+##if (Database == "PGSQL")
   postgres:
     image: postgres
     environment:
@@ -23,7 +26,9 @@ services:
       - "5430:5432"
     networks:
       - clean-network
+##endif
 
+##if (Database == "MySQL")
   mysql:
     image: mysql
     environment:
@@ -32,3 +37,4 @@ services:
       - '3307:3307'
     networks:
       - clean-network
+  ##endif

@@ -24,7 +24,7 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
                 config.AddInMemoryCollection(new[]
                 {
                     new KeyValuePair<string, string>(
-                        "ConnectionStrings:GloboTicketTicketManagementConnectionString", _dbFixture.ApplicationConnString),
+                        "ConnectionStrings:ApplicationConnectionString", _dbFixture.ApplicationConnString),
                 });
             });
             builder.ConfigureAppConfiguration((context, config) =>
@@ -32,7 +32,7 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
                 config.AddInMemoryCollection(new[]
                 {
                     new KeyValuePair<string, string>(
-                        "ConnectionStrings:GloboTicketIdentityConnectionString", _dbFixture.IdentityConnString)
+                        "ConnectionStrings:IdentityConnectionString", _dbFixture.IdentityConnString)
                 });
             });
             builder.ConfigureAppConfiguration((context, config) =>
@@ -40,7 +40,7 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
                 config.AddInMemoryCollection(new[]
                 {
                     new KeyValuePair<string, string>(
-                        "ConnectionStrings:GloboTicketHealthCheckConnectionString", _dbFixture.HealthCheckConnString)
+                        "ConnectionStrings:HealthCheckConnectionString", _dbFixture.HealthCheckConnString)
                 });
             });
             builder.ConfigureAppConfiguration((context, config) =>

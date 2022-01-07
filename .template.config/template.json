@@ -1,0 +1,135 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Neoosft Technologies",
+    "classifications": ["Web", "Solution"],
+    "name": "Neosoft Technologies Clean Architecture",
+    "defaultName": "MyCleanProject",
+    "identity": "Neosoft.Technologies.Clean.Architecture",
+    "shortName": "neotech-ca",
+    "tags": {
+      "language": "C#",
+      "type": "solution"
+    },
+    "sourceName": "NeoBoilerplate",
+    "preferNameDirectory": true,
+	"guids": [
+		"1ECA78A8-42D6-43A9-85C6-8FB29C8591AF",
+		"D9521E64-C28E-4C5C-8523-9A32D03802A8",
+		"0EF94B71-5AE7-4B7E-8B3A-DFC80FBFB7A7",
+		"8747A220-8B36-4E4C-81CB-EA69F7D64D4F",
+		"85390A65-02D1-410C-846B-197DF5E01168",
+		"41A0BEF1-34B6-468A-83D7-4F8C6A8FB654",
+		"530933CC-AFDC-4A8D-B823-BE8178BFC570",
+		"FF97E1A5-944C-4FEE-AE96-B6EA9F1E92DF",
+		"B85BE02A-62B0-452C-B0FB-9C325302CDCE",
+		"152B1EBF-3CA4-46C9-AE05-8783A64BEA41",
+		"FD2A03DF-CA97-4295-B196-627E9C488FE1",
+		"C8EC46C7-1BA2-4B3D-AD75-3989231A6E9F",
+		"5710746C-B4DA-4A76-9270-6AD9E13C4737",
+		"9EC4D129-E267-4D13-BC11-7C5EF6CF196B",
+		"A0630B4A-4528-4EB9-84F4-F21AF04032DE",
+		"0E6F31B4-22B7-4F68-9AB7-CBC1AB22CBEC",
+		"67ED70F8-67A4-4120-A30D-BA4BC597047C",
+		"5A3A2012-EECC-456F-B1A8-4ADF765E90B0",
+		"31B16719-E1AF-477F-9D05-6312F7C0646E"
+	],
+	"description": "Creates Clean Architecture Project",
+	"symbols": {
+		"Framework": {
+			"type": "parameter",
+			"description": "The target framework for the project",
+			"datatype": "choice",
+			"choices": [
+			{
+				"choice": "net6.0",
+				"description": "Target net6.0"
+			}
+			],
+			"replaces": "net6.0",
+			"defaultValue": "net6.0"
+		},
+		"Database": {
+			"type": "parameter",
+			"description": "Database support for the project",
+			"datatype": "choice",
+			"choices": [
+				{
+					"choice": "MSSQL",
+					"description": "Microsoft SQL Server"
+				},
+				{
+					"choice": "PGSQL",
+					"description": "PostgreSQL Server"
+				},
+				{
+					"choice": "MySQL",
+					"description": "MySQL Server"
+				}
+			],
+			"defaultValue": "MSSQL"
+		},
+		"Communication": {
+			"type": "parameter",
+			"description": "Communication Protocol for the project",
+			"datatype": "choice",
+			"choices": [
+				{
+					"choice": "REST",
+					"description": "REST API"
+				},
+				{
+					"choice": "gRPC",
+					"description": "gRPC"
+				}
+			],
+			"defaultValue": "REST"
+		}
+	},
+	"sources": [
+		{
+			"modifiers": [
+				{
+					"condition": "(Database == \"MSSQL\")",
+					"exclude": [
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MySQL/**",
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/PGSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MySQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/PGSQL/**"
+					]
+				},
+				{
+					"condition": "(Database == \"PGSQL\")",
+					"exclude": [
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MySQL/**",
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MSSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MySQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MSSQL/**"
+					]
+				},
+				{
+					"condition": "(Database == \"MySQL\")",
+					"exclude": [
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MSSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/PGSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MSSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/PGSQL/**"
+					]
+				},
+				{
+					"condition": "(Communication == \"REST\")",
+					"exclude": [
+						"src/gRPC/**"
+					]
+				},
+				{
+					"condition": "(Communication == \"gRPC\")",
+					"exclude": [
+						"src/API/**",
+						"test/NeoBoilerplate.API.IntegrationTests/**",
+						"test/NeoBoilerplate.API.UnitTests/**"
+					]
+				}
+			]
+		}
+	]
+}

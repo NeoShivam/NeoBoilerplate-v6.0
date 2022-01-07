@@ -8,13 +8,13 @@ using Xunit;
 
 namespace NeoBoilerplate.Persistence.IntegrationTests
 {
-    public class GloboTicketDbContextTests
+    public class ApplicationDbContextTests
     {
-        private readonly ApplicationDbContext _globoTicketDbContext;
+        private readonly ApplicationDbContext _ApplicationDbContext;
         private readonly Mock<ILoggedInUserService> _loggedInUserServiceMock;
         private readonly string _loggedInUserId;
 
-        public GloboTicketDbContextTests()
+        public ApplicationDbContextTests()
         {
             var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
 
@@ -22,7 +22,7 @@ namespace NeoBoilerplate.Persistence.IntegrationTests
             _loggedInUserServiceMock = new Mock<ILoggedInUserService>();
             _loggedInUserServiceMock.Setup(m => m.UserId).Returns(_loggedInUserId);
 
-            _globoTicketDbContext = new ApplicationDbContext(dbContextOptions, _loggedInUserServiceMock.Object);
+            _ApplicationDbContext = new ApplicationDbContext(dbContextOptions, _loggedInUserServiceMock.Object);
         }
 
 
@@ -31,8 +31,8 @@ namespace NeoBoilerplate.Persistence.IntegrationTests
         {
             var ev = new Event() { EventId = Guid.NewGuid(), Name = "Test event" };
 
-            _globoTicketDbContext.Events.Add(ev);
-            await _globoTicketDbContext.SaveChangesAsync();
+            _ApplicationDbContext.Events.Add(ev);
+            await _ApplicationDbContext.SaveChangesAsync();
 
             ev.CreatedBy.ShouldBe(_loggedInUserId);
         }

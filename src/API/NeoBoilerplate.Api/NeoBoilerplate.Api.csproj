@@ -8,16 +8,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="6.0.1-rc2.2" />
-    <PackageReference Include="AspNetCore.HealthChecks.MySql" Version="6.0.1-rc1.1" />
-    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.1-rc2.3" />
+        
+	  <!--#if (Database == "MSSQL")-->
+    <PackageReference Include="AspNetCore.HealthChecks.UI.SqlServer.Storage" Version="6.0.1-rc2.4" />
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.1-rc2.7" />
+	  <!--#endif -->
+
+	  <!--#if (Database == MySQL) -->
+    <PackageReference Include="AspNetCore.HealthChecks.MySql" Version="6.0.1-rc1.1" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.MySql.Storage" Version="6.0.1-rc2.4" />
+	  <!--#endif -->
+
+	  <!--#if (Database == PGSQL) -->
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.1-rc2.3" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.PostgreSQL.Storage" Version="6.0.1-rc2.4" />
+	  <!--#endif -->
+	  
     <PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.1-rc2.4" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.1-rc2.4" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="6.0.1-rc2.4" />
-    <PackageReference Include="AspNetCore.HealthChecks.UI.MySql.Storage" Version="6.0.1-rc2.4" />
-    <PackageReference Include="AspNetCore.HealthChecks.UI.PostgreSQL.Storage" Version="6.0.1-rc2.4" />
-    <PackageReference Include="AspNetCore.HealthChecks.UI.SqlServer.Storage" Version="6.0.1-rc2.4" />
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="6.0.1-rc2.2" />
     <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.1" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />

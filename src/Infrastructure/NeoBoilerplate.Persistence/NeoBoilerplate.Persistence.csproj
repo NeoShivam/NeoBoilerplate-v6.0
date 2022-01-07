@@ -15,10 +15,19 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.2" />
+
+	  <!--#if (Database == "MSSQL")-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+	  <!--#endif-->
+
+	  <!--#if (Database == "MySQL")-->
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
+	  <!--#endif-->
+
+	  <!--#if (Database == "PGSQL")-->
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.2" />
+	  <!--#endif-->
   </ItemGroup>
 
   <ItemGroup>
