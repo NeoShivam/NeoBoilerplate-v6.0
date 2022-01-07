@@ -98,6 +98,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+//#if (Database == "PGSQL")
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+//#endif
 
 app.UseHttpsRedirection();
 

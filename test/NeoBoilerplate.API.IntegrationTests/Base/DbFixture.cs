@@ -24,8 +24,6 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
         {
             var applicationBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             var identityBuilder = new DbContextOptionsBuilder<IdentityDbContext>();
-
-
             //#if (Database == "MSSQL")
             ApplicationConnString = $"Server=localhost,1433;Database={ApplicationDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M";
                     IdentityConnString = $"Server=localhost,1433;Database={IdentityDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M";
@@ -33,7 +31,6 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
                     applicationBuilder.UseSqlServer(ApplicationConnString);
                     identityBuilder.UseSqlServer(IdentityConnString);
             //#endif
-
             //#if (Database == "PGSQL")
             ApplicationConnString = $"Server=localhost;Port=5430;Database={ApplicationDbName};User Id=root;Password=root;CommandTimeout = 300;";
                     IdentityConnString = $"Server=localhost;Port=5430;Database={IdentityDbName};User Id=root;Password=root;CommandTimeout = 300;";
@@ -41,8 +38,7 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
                     HealthCheckConnString = $"Server=localhost;Port=5430;Database={HealthCheckDbName};User Id=root;Password=root;CommandTimeout = 300;";
                     applicationBuilder.UseNpgsql(ApplicationConnString);
                     identityBuilder.UseNpgsql(IdentityConnString);
-            //endif
-
+            //#endif
             //#if (Database == "MySQL")
             ApplicationConnString = $"Server=localhost;Port=3306;Database={ApplicationDbName};Userid=root;Password=root;";
                     IdentityConnString = $"Server=localhost;Port=3306;Database={IdentityDbName};Userid=root;Password=root;";
@@ -50,7 +46,6 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
                     applicationBuilder.UseMySql(ApplicationConnString, new MySqlServerVersion(new Version(8, 0, 11)));
                     identityBuilder.UseMySql(IdentityConnString, new MySqlServerVersion(new Version(8, 0, 11)));
             //#endif
-
             _applicationDbContext = new ApplicationDbContext(applicationBuilder.Options);
             _applicationDbContext.Database.EnsureCreated();
 

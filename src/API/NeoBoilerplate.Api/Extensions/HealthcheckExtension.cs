@@ -42,7 +42,6 @@ namespace NeoBoilerplate.Api.Extensions
                         opt.AddHealthCheckEndpoint("API", "/healthz"); //map health check api
                     }).AddPostgreSqlStorage(configuration["ConnectionStrings:HealthCheckConnectionString"]);
             //#endif
-
             //#if (Database == "MySQL")
             services.AddHealthChecks()
                         .AddMySql(configuration["ConnectionStrings:IdentityConnectionString"], tags: new[] {
@@ -59,9 +58,7 @@ namespace NeoBoilerplate.Api.Extensions
                         opt.SetApiMaxActiveRequests(1); //api requests concurrency
                         opt.AddHealthCheckEndpoint("API", "/healthz"); //map health check api
                     }).AddMySqlStorage(configuration["ConnectionStrings:HealthCheckConnectionString"]);
-                   //#endif
-            
-
+                   //#endif          
             return services;
         }
     }

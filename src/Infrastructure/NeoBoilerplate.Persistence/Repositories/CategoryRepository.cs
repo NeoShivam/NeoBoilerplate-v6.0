@@ -1,8 +1,8 @@
 ﻿using NeoBoilerplate.Application.Contracts.Persistence;
 using NeoBoilerplate.Domain.Entities;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;

@@ -15,19 +15,16 @@ namespace NeoBoilerplate.Persistence
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("ApplicationConnectionString")));
             //#endif
-
             //#if (Database == "PGSQL")
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("ApplicationConnectionString")));
             //#endif
-
             //#if (Database == "MySQL")
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseMySql(configuration.GetConnectionString("ApplicationConnectionString"),
             new MySqlServerVersion(new Version(8, 0, 11))
             ));
             //#endif
-
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
