@@ -25,6 +25,10 @@ namespace NeoBoilerplate.Persistence
             new MySqlServerVersion(new Version(8, 0, 11))
             ));
             //#endif
+            //#if (Database == "SQLite")
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(configuration.GetConnectionString("ApplicationConnectionString")));
+            //#endif
             services.AddScoped(typeof(IAsyncRepository<>), typeof(BaseRepository<>));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IEventRepository, EventRepository>();

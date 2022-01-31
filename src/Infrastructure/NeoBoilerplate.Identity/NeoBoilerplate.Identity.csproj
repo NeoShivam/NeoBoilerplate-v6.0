@@ -18,7 +18,9 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-
+	  <!--#if (Database == "SQLite")-->
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.1" />
+	  <!--#endif-->    
 	  <!--#if (Database == "MSSQL")-->
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
 	  <!--#endif-->
@@ -34,10 +36,19 @@
     <ProjectReference Include="..\..\Core\NeoBoilerplate.Application\NeoBoilerplate.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup>    
+	  <!--#if (Database == "SQLite")-->
+    <Folder Include="Migrations\SQLite\" />
+	  <!--#endif-->    
+	  <!--#if (Database == "MSSQL")-->
     <Folder Include="Migrations\MSSQL\" />
+	  <!--#endif-->
+	  <!--#if (Database == "MySQL")-->
     <Folder Include="Migrations\MySQL\" />
+	  <!--#endif-->
+	  <!--#if (Database == "PGSQL")-->
     <Folder Include="Migrations\PGSQL\" />
+	  <!--#endif-->
   </ItemGroup>
 
 </Project>

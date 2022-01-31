@@ -58,7 +58,24 @@ namespace NeoBoilerplate.Api.Extensions
                         opt.SetApiMaxActiveRequests(1); //api requests concurrency
                         opt.AddHealthCheckEndpoint("API", "/healthz"); //map health check api
                     }).AddMySqlStorage(configuration["ConnectionStrings:HealthCheckConnectionString"]);
-                   //#endif          
+            //#endif
+            //#if (Database == "SQLite")
+            services.AddHealthChecks()
+                        .AddSqlite(configuration["ConnectionStrings:IdentityConnectionString"], tags: new[] {
+                            "db",
+                            "all"})
+                        .AddUrlGroup(new Uri(configuration["API:WeatertherInfo"]), tags: new[] {
+                            "testdemoUrl",
+                            "all"
+                        });
+            services.AddHealthChecksUI(opt =>
+            {
+                opt.SetEvaluationTimeInSeconds(15); //time in seconds between check
+                opt.MaximumHistoryEntriesPerEndpoint(60); //maximum history of checks
+                opt.SetApiMaxActiveRequests(1); //api requests concurrency
+                opt.AddHealthCheckEndpoint("API", "/healthz"); //map health check api
+            }).AddSqliteStorage(configuration["ConnectionStrings:HealthCheckConnectionString"]);
+            //#endif
             return services;
         }
     }

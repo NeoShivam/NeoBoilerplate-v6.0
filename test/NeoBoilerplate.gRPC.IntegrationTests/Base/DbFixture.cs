@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using Xunit;
 
-namespace NeoBoilerplate.API.IntegrationTests.Base
+namespace NeoBoilerplate.gRPC.IntegrationTests.Base
 {
     public class DbFixture : IDisposable
     {
@@ -13,8 +13,6 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
         private readonly IdentityDbContext _identityDbContext;
         public readonly string ApplicationDbName = $"Application-{Guid.NewGuid()}";
         public readonly string IdentityDbName = $"Identity-{Guid.NewGuid()}";
-        public readonly string HealthCheckDbName = $"HealthCheck";
-        public readonly string HealthCheckConnString;
         public readonly string ApplicationConnString;
         public readonly string IdentityConnString;
 
@@ -24,35 +22,33 @@ namespace NeoBoilerplate.API.IntegrationTests.Base
         {
             var applicationBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             var identityBuilder = new DbContextOptionsBuilder<IdentityDbContext>();
-            //#if (Database == "MSSQL")
-            ApplicationConnString = $"Server=localhost,1433;Database={ApplicationDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M;TrustServerCertificate=True;";
-                    IdentityConnString = $"Server=localhost,1433;Database={IdentityDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M;TrustServerCertificate=True;";
-                    HealthCheckConnString = $"Server=localhost,1433;Database={HealthCheckDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M;TrustServerCertificate=True;";
-                    applicationBuilder.UseSqlServer(ApplicationConnString);
-                    identityBuilder.UseSqlServer(IdentityConnString);
+
+            //#if (Database = "MSSQL")
+                ApplicationConnString = $"Server=localhost,1433;Database={ApplicationDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M";
+                IdentityConnString = $"Server=localhost,1433;Database={IdentityDbName};User=sa;Password=2@LaiNw)PDvs^t>L!Ybt]6H^%h3U>M";
+                applicationBuilder.UseSqlServer(ApplicationConnString);
+                identityBuilder.UseSqlServer(IdentityConnString);
             //#endif
             //#if (Database == "PGSQL")
-            ApplicationConnString = $"Server=localhost;Port=5430;Database={ApplicationDbName};User Id=root;Password=root;CommandTimeout = 300;";
-                    IdentityConnString = $"Server=localhost;Port=5430;Database={IdentityDbName};User Id=root;Password=root;CommandTimeout = 300;";
-
-                    HealthCheckConnString = $"Server=localhost;Port=5430;Database={HealthCheckDbName};User Id=root;Password=root;CommandTimeout = 300;";
-                    applicationBuilder.UseNpgsql(ApplicationConnString);
-                    identityBuilder.UseNpgsql(IdentityConnString);
+                ApplicationConnString = $"Server=localhost;Port=5430;Database={ApplicationDbName};User Id=root;Password=root;CommandTimeout = 300;";
+                IdentityConnString = $"Server=localhost;Port=5430;Database={IdentityDbName};User Id=root;Password=root;CommandTimeout = 300;";
+                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+                applicationBuilder.UseNpgsql(ApplicationConnString);
+                identityBuilder.UseNpgsql(IdentityConnString);
             //#endif
             //#if (Database == "MySQL")
-            ApplicationConnString = $"Server=localhost;Port=3306;Database={ApplicationDbName};Userid=root;Password=root;";
-                    IdentityConnString = $"Server=localhost;Port=3306;Database={IdentityDbName};Userid=root;Password=root;";
-                    HealthCheckConnString = $"Server=localhost;Port=3306;Database={HealthCheckDbName};Userid=root;Password=root;";
-                    applicationBuilder.UseMySql(ApplicationConnString, new MySqlServerVersion(new Version(8, 0, 11)));
-                    identityBuilder.UseMySql(IdentityConnString, new MySqlServerVersion(new Version(8, 0, 11)));
+                ApplicationConnString = $"Server=localhost;Port=3306;Database={ApplicationDbName};Userid=root;Password=root;";
+                IdentityConnString = $"Server=localhost;Port=3306;Database={IdentityDbName};Userid=root;Password=root;";
+                applicationBuilder.UseMySql(ApplicationConnString, new MySqlServerVersion(new Version(8, 0, 11)));
+                identityBuilder.UseMySql(IdentityConnString, new MySqlServerVersion(new Version(8, 0, 11)));
             //#endif
             //#if (Database == "SQLite")
             ApplicationConnString = $"Data Source=..//..//..//db//{ApplicationDbName}";
             IdentityConnString = $"Data Source=..//..//..//db//{IdentityDbName}";
-            HealthCheckConnString = $"Data Source=..//..//..//db//{HealthCheckDbName}";
             applicationBuilder.UseSqlite(ApplicationConnString);
             identityBuilder.UseSqlite(IdentityConnString);
             //#endif
+
             _applicationDbContext = new ApplicationDbContext(applicationBuilder.Options);
             _applicationDbContext.Database.EnsureCreated();
 

@@ -4,10 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>f0fe4f30-3f1b-44fc-bf55-24e0a0172254</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+	  <!--#if (Database == "SQLite")-->
+	  <PackageReference Include="AspNetCore.HealthChecks.Sqlite" Version="6.0.1" />
+	  <PackageReference Include="AspNetCore.HealthChecks.UI.SQLite.Storage" Version="6.0.2" />
+	  <!--#endif -->	  
 	  <!--#if (Database == "MSSQL")-->
     <PackageReference Include="AspNetCore.HealthChecks.UI.SqlServer.Storage" Version="6.0.1-rc2.4" />
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.1-rc2.7" />

@@ -6,10 +6,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>    
+	  <!--#if (Database == "SQLite")-->
+    <Folder Include="Migrations\SQLite\" />
+	  <!--#endif-->    
+	  <!--#if (Database == "MSSQL")-->
     <Folder Include="Migrations\MSSQL\" />
+	  <!--#endif-->
+	  <!--#if (Database == "MySQL")-->
     <Folder Include="Migrations\MySQL\" />
+	  <!--#endif-->
+	  <!--#if (Database == "PGSQL")-->
     <Folder Include="Migrations\PGSQL\" />
+	  <!--#endif-->
     <Folder Include="Repositories\" />
   </ItemGroup>
 
@@ -17,6 +26,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0" />
+	  <!--#if (Database == "SQLite")-->
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.1" />
+	  <!--#endif-->
 	  <!--#if (Database == "MSSQL")-->
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
 	  <!--#endif-->

@@ -2,10 +2,10 @@
     "$schema": "http://json.schemastore.org/template",
     "author": "Neoosft Technologies",
     "classifications": ["Web", "Solution"],
-    "name": "Neosoft Technologies Clean Architecture",
+    "name": "Neosoft Technologies Clean Architecture 6.0",
     "defaultName": "MyCleanProject",
-    "identity": "Neosoft.Technologies.Clean.Architecture",
-    "shortName": "neotech-ca",
+    "identity": "Neosoft.Technologies.Clean.Architecture6.0",
+    "shortName": "neotech-ca6.0",
     "tags": {
       "language": "C#",
       "type": "solution"
@@ -31,7 +31,8 @@
 		"0E6F31B4-22B7-4F68-9AB7-CBC1AB22CBEC",
 		"67ED70F8-67A4-4120-A30D-BA4BC597047C",
 		"5A3A2012-EECC-456F-B1A8-4ADF765E90B0",
-		"31B16719-E1AF-477F-9D05-6312F7C0646E"
+		"31B16719-E1AF-477F-9D05-6312F7C0646E",
+		"F48D57BD-2E8C-43A8-9628-DE69B3844318"
 	],
 	"description": "Creates Clean Architecture Project",
 	"symbols": {
@@ -64,6 +65,10 @@
 				{
 					"choice": "MySQL",
 					"description": "MySQL Server"
+				},
+				{
+					"choice": "SQLite",
+					"description": "SQLite Server"
 				}
 			],
 			"defaultValue": "MSSQL"
@@ -93,8 +98,10 @@
 					"exclude": [
 						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MySQL/**",
 						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/PGSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/SQLite/**",
 						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MySQL/**",
-						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/PGSQL/**"
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/PGSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/SQLite/**"						
 					]
 				},
 				{
@@ -102,8 +109,10 @@
 					"exclude": [
 						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MySQL/**",
 						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MSSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/SQLite/**",
 						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MySQL/**",
-						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MSSQL/**"
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MSSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/SQLite/**"
 					]
 				},
 				{
@@ -111,14 +120,28 @@
 					"exclude": [
 						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MSSQL/**",
 						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/PGSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/SQLite/**",
 						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MSSQL/**",
-						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/PGSQL/**"
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/PGSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/SQLite/**"
+					]
+				},
+				{
+					"condition": "(Database == \"SQLite\")",
+					"exclude": [
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MSSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/PGSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Identity/Migrations/MySQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MSSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/PGSQL/**",
+						"src/Infrastructure/NeoBoilerplate.Persistence/Migrations/MySQL/**"
 					]
 				},
 				{
 					"condition": "(Communication == \"REST\")",
 					"exclude": [
-						"src/gRPC/**"
+						"src/gRPC/**",
+						"test/NeoBoilerplate.gRPC.IntegrationTests/**"
 					]
 				},
 				{

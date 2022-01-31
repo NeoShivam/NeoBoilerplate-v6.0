@@ -36,6 +36,11 @@ namespace NeoBoilerplate.Identity
             new MySqlServerVersion(new Version(8, 0,11)),
                          b => b.MigrationsAssembly(typeof(IdentityDbContext).Assembly.FullName)));
             //#endif
+            //#if (Database == "SQLite")
+            services.AddDbContext<IdentityDbContext>(
+              options => options.UseSqlite(configuration.GetConnectionString("IdentityConnectionString"),
+              b => b.MigrationsAssembly(typeof(IdentityDbContext).Assembly.FullName)));
+            //#endif
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDbContext>().AddDefaultTokenProviders();
 

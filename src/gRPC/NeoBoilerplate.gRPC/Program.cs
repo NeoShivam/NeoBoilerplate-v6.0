@@ -29,7 +29,11 @@ builder.Services.Configure<KestrelServerOptions>(options =>
     });
 });
 
-builder.Services.AddGrpc();
+builder.Services.AddGrpc(
+    options =>
+    {
+        options.Interceptors.Add<ExceptionInterceptor>();
+    });
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddDataProtection();
 builder.Services.AddApplicationServices();
@@ -37,6 +41,8 @@ builder.Services.AddInfrastructureServices(Configuration);
 builder.Services.AddPersistenceServices(Configuration);
 builder.Services.AddIdentityServices(Configuration);
 builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 
 
 
@@ -55,6 +61,8 @@ if (app.Environment.IsDevelopment())
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //#endif
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseCustomExceptionHandler();
 app.UseEndpoints(endpoints =>
 {
@@ -73,3 +81,5 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
+public partial class Program{ }

@@ -6,6 +6,7 @@ using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using NeoBoilerplate.Application.Exceptions;
 
 namespace NeoBoilerplate.Application.Features.Categories.Commands.CreateCategory
 {
@@ -31,12 +32,7 @@ namespace NeoBoilerplate.Application.Features.Categories.Commands.CreateCategory
 
             if (validationResult.Errors.Count > 0)
             {
-                createCategoryCommandResponse = new Response<CreateCategoryDto>("failure");
-                createCategoryCommandResponse.Errors = new List<string>();
-                foreach (var error in validationResult.Errors)
-                {
-                    createCategoryCommandResponse.Errors.Add(error.ErrorMessage);
-                }
+                throw new ValidationException(validationResult);
             }
             else
             {

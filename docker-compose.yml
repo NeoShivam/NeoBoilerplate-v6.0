@@ -38,3 +38,19 @@ services:
     networks:
       - clean-network
   ##endif
+  
+##if (Database == "SQLite")
+  sqlite:
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
+    networks:
+      - clean-network
+    volumes:
+##if (Communication == "REST")
+      - ./test/NeoBoilerplate.API.IntegrationTests/./db:/root/db/REST
+##endif
+##if (Communication == "GRPC")
+      - ./test/NeoBoilerplate.gRPC.IntegrationTests/./db:/root/db/gRPC
+##endif
+##endif

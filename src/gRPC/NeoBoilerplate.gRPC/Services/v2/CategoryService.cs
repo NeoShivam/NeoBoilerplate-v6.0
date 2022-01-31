@@ -7,6 +7,7 @@ using Grpc.Core;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NeoBoilerplate.gRPC.Services.v2
 {
@@ -21,6 +22,7 @@ namespace NeoBoilerplate.gRPC.Services.v2
             _mapper = mapper;
         }
 
+        [Authorize(Roles = "Administrator")]
         public override async Task<ListOfCategories> GetAllCategories(GetCategoriesRequest request, ServerCallContext context)
         {
             //_logger.LogInformation("GetAllCategories Initiated");
@@ -34,6 +36,7 @@ namespace NeoBoilerplate.gRPC.Services.v2
             return allCategories;
         }
 
+        [Authorize]
         public override async Task<GetCategoriesListWithEventsQueryResponse> GetCategoriesListWithEventsQuery(GetCategoriesListWithEventsQueryRequest request, ServerCallContext context)
         {
             var response = new GetCategoriesListWithEventsQueryResponse();

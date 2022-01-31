@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -19,20 +18,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBoilerplate.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBoilerplate.Persistence", "src\Infrastructure\NeoBoilerplate.Persistence\NeoBoilerplate.Persistence.csproj", "{FF97E1A5-944C-4FEE-AE96-B6EA9F1E92DF}"
 EndProject
-
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B85BE02A-62B0-452C-B0FB-9C325302CDCE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBoilerplate.Persistence.IntegrationTests", "test\NeoBoilerplate.Persistence.IntegrationTests\NeoBoilerplate.Persistence.IntegrationTests.csproj", "{152B1EBF-3CA4-46C9-AE05-8783A64BEA41}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8747A220-8B36-4E4C-81CB-EA69F7D64D4F} = {8747A220-8B36-4E4C-81CB-EA69F7D64D4F}
+		{85390A65-02D1-410C-846B-197DF5E01168} = {85390A65-02D1-410C-846B-197DF5E01168}
+		{FF97E1A5-944C-4FEE-AE96-B6EA9F1E92DF} = {FF97E1A5-944C-4FEE-AE96-B6EA9F1E92DF}
+		{41A0BEF1-34B6-468A-83D7-4F8C6A8FB654} = {41A0BEF1-34B6-468A-83D7-4F8C6A8FB654}
+	EndProjectSection
 EndProject
-
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBoilerplate.Application.UnitTests", "test\NeoBoilerplate.Application.UnitTests\NeoBoilerplate.Application.UnitTests.csproj", "{FD2A03DF-CA97-4295-B196-627E9C488FE1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBoilerplate.Identity.UnitTests", "test\NeoBoilerplate.Identity.UnitTests\NeoBoilerplate.Identity.UnitTests.csproj", "{C8EC46C7-1BA2-4B3D-AD75-3989231A6E9F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBoilerplate.Infrastructure.UnitTests", "test\NeoBoilerplate.Infrastructure.UnitTests\NeoBoilerplate.Infrastructure.UnitTests.csproj", "{5710746C-B4DA-4A76-9270-6AD9E13C4737}"
 EndProject
-
-
 //#if (Communication == "REST")
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{9EC4D129-E267-4D13-BC11-7C5EF6CF196B}"
 EndProject
@@ -43,14 +44,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBoilerplate.API.UnitTests", "test\NeoBoilerplate.API.UnitTests\NeoBoilerplate.API.UnitTests.csproj", "{67ED70F8-67A4-4120-A30D-BA4BC597047C}"
 EndProject
 //#endif
-
-//#if (Communication == "gRPC")
+//#if (Communication == "GRPC")
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gRPC", "gRPC", "{5A3A2012-EECC-456F-B1A8-4ADF765E90B0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBoilerplate.gRPC", "src\gRPC\NeoBoilerplate.gRPC\NeoBoilerplate.gRPC.csproj", "{31B16719-E1AF-477F-9D05-6312F7C0646E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBoilerplate.gRPC.IntegrationTests", "test\NeoBoilerplate.gRPC.IntegrationTests\NeoBoilerplate.gRPC.IntegrationTests.csproj", "{F48D57BD-2E8C-43A8-9628-DE69B3844318}"
+EndProject
 //#endif
-
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,7 +72,6 @@ Global
 		{67ED70F8-67A4-4120-A30D-BA4BC597047C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67ED70F8-67A4-4120-A30D-BA4BC597047C}.Release|Any CPU.Build.0 = Release|Any CPU
 	//#endif
-
 		{8747A220-8B36-4E4C-81CB-EA69F7D64D4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8747A220-8B36-4E4C-81CB-EA69F7D64D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8747A220-8B36-4E4C-81CB-EA69F7D64D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -107,15 +107,17 @@ Global
 		{5710746C-B4DA-4A76-9270-6AD9E13C4737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5710746C-B4DA-4A76-9270-6AD9E13C4737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5710746C-B4DA-4A76-9270-6AD9E13C4737}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5710746C-B4DA-4A76-9270-6AD9E13C4737}.Release|Any CPU.Build.0 = Release|Any CPU
-
-		//#if (Communication == "gRPC")
+		{5710746C-B4DA-4A76-9270-6AD9E13C4737}.Release|Any CPU.Build.0 = Release|Any CPU		
+	//#if (Communication == "GRPC")
 		{31B16719-E1AF-477F-9D05-6312F7C0646E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{31B16719-E1AF-477F-9D05-6312F7C0646E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31B16719-E1AF-477F-9D05-6312F7C0646E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31B16719-E1AF-477F-9D05-6312F7C0646E}.Release|Any CPU.Build.0 = Release|Any CPU
-		//#endif
-
+		{F48D57BD-2E8C-43A8-9628-DE69B3844318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F48D57BD-2E8C-43A8-9628-DE69B3844318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F48D57BD-2E8C-43A8-9628-DE69B3844318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F48D57BD-2E8C-43A8-9628-DE69B3844318}.Release|Any CPU.Build.0 = Release|Any CPU
+	//#endif
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -134,14 +136,14 @@ Global
 		{41A0BEF1-34B6-468A-83D7-4F8C6A8FB654} = {0EF94B71-5AE7-4B7E-8B3A-DFC80FBFB7A7}
 		{530933CC-AFDC-4A8D-B823-BE8178BFC570} = {0EF94B71-5AE7-4B7E-8B3A-DFC80FBFB7A7}
 		{FF97E1A5-944C-4FEE-AE96-B6EA9F1E92DF} = {0EF94B71-5AE7-4B7E-8B3A-DFC80FBFB7A7}
-		{A0630B4A-4528-4EB9-84F4-F21AF04032DE} = {9EC4D129-E267-4D13-BC11-7C5EF6CF196B}
 		{152B1EBF-3CA4-46C9-AE05-8783A64BEA41} = {B85BE02A-62B0-452C-B0FB-9C325302CDCE}
 		{FD2A03DF-CA97-4295-B196-627E9C488FE1} = {B85BE02A-62B0-452C-B0FB-9C325302CDCE}
 		{C8EC46C7-1BA2-4B3D-AD75-3989231A6E9F} = {B85BE02A-62B0-452C-B0FB-9C325302CDCE}
 		{5710746C-B4DA-4A76-9270-6AD9E13C4737} = {B85BE02A-62B0-452C-B0FB-9C325302CDCE}
-	//#if (Communication == "gRPC")
+	//#if (Communication == "GRPC")
 		{5A3A2012-EECC-456F-B1A8-4ADF765E90B0} = {1ECA78A8-42D6-43A9-85C6-8FB29C8591AF}
 		{31B16719-E1AF-477F-9D05-6312F7C0646E} = {5A3A2012-EECC-456F-B1A8-4ADF765E90B0}
+		{F48D57BD-2E8C-43A8-9628-DE69B3844318} = {B85BE02A-62B0-452C-B0FB-9C325302CDCE}
 	//#endif
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
