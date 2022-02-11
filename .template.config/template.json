@@ -1,6 +1,6 @@
 {
     "$schema": "http://json.schemastore.org/template",
-    "author": "Neoosft Technologies",
+    "author": "Neosoft Technologies",
     "classifications": ["Web", "Solution"],
     "name": "Neosoft Technologies Clean Architecture 6.0",
     "defaultName": "MyCleanProject",
